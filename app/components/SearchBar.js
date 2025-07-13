@@ -42,8 +42,9 @@ export default function SearchBar({ onSearch, onClear }) {
   return (
     <div className="w-full max-w-4xl mx-auto mb-8">
       <form onSubmit={handleSearch} className="space-y-4">
-        <div className="flex flex-col sm:flex-row gap-4 items-end">
-          {/* Barra de búsqueda */}
+        {/* Layout de 2 renglones en móvil, 1 renglón en desktop */}
+        <div className="flex flex-col sm:flex-row gap-4">
+          {/* Primer renglón: Barra de búsqueda (siempre arriba) */}
           <div className="flex-1 relative">
             <input
               type="text"
@@ -59,42 +60,45 @@ export default function SearchBar({ onSearch, onClear }) {
             </div>
           </div>
 
-          {/* Filtro de categoría */}
-          <div className="sm:w-48">
-            <label className="block text-xs text-gray-600 mb-1">Kategori (automatisk)</label>
-            <select
-              value={selectedCategory}
-              onChange={handleCategoryChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white shadow-sm"
-            >
-              {categories.map((category) => (
-                <option key={category.value} value={category.value}>
-                  {category.label}
-                </option>
-              ))}
-            </select>
-          </div>
+          {/* Segundo renglón: Categoría y botones (abajo en móvil, al lado en desktop) */}
+          <div className="flex flex-col xs:flex-row gap-4 sm:w-auto">
+            {/* Filtro de categoría */}
+            <div className="w-full xs:w-48">
+              <select
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white shadow-sm"
+              >
+                {categories.map((category) => (
+                  <option key={category.value} value={category.value}>
+                    {category.label}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          {/* Botones */}
-          <div className="flex gap-2">
-            <button
-              type="submit"
-              className={`px-6 py-3 font-medium rounded-lg focus:ring-2 focus:ring-offset-2 transition-colors shadow-sm ${
-                searchTerm.trim() 
-                  ? 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500' 
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }`}
-              disabled={!searchTerm.trim()}
-            >
-              Søg tekst
-            </button>
-            <button
-              type="button"
-              onClick={handleClear}
-              className="px-6 py-3 bg-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-300 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors shadow-sm"
-            >
-              Ryd
-            </button>
+            {/* Botones */}
+            <div className="flex gap-2 w-full xs:w-auto">
+              <button
+                type="submit"
+                className={`flex-1 xs:flex-none px-6 py-3 font-medium rounded-lg focus:ring-2 focus:ring-offset-2 transition-colors shadow-sm ${
+                  searchTerm.trim() 
+                    ? 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500' 
+                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                }`}
+                disabled={!searchTerm.trim()}
+              >
+                Søg tekst
+              </button>
+              
+              <button
+                type="button"
+                onClick={handleClear}
+                className="flex-1 xs:flex-none px-6 py-3 bg-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-300 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors shadow-sm"
+              >
+                Ryd
+              </button>
+            </div>
           </div>
         </div>
 
