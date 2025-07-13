@@ -10,8 +10,7 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   
-  // Optimización de compilación
-  swcMinify: true,
+
   
   // Headers de seguridad
   async headers() {
