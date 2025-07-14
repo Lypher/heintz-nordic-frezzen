@@ -21,7 +21,7 @@ export default function Home() {
   const [filteredProducts, setFilteredProducts] = useState(null);
   const [searchActive, setSearchActive] = useState(false);
 
-  // Definición de los 3 productos con sus respectivas imágenes
+  // Definición de los 3 productos con sus respectivas imágenes de las carpetas
   const products = [
     {
       id: 1,
@@ -29,10 +29,10 @@ export default function Home() {
       description: "Kvalitets kaninkød til professionelle køkkener og restauranter",
       category: "Professionel Serie",
       images: [
-        { src: "/1.jpeg", alt: "Premium kaninkød produkt 1" },
-        { src: "/2.jpeg", alt: "Premium kaninkød produkt 2" },
-        { src: "/3.jpeg", alt: "Premium kaninkød produkt 3" },
-        { src: "/4.jpeg", alt: "Premium kaninkød produkt 4" },
+        "/product1/1.jpeg",
+        "/product1/2.jpeg",
+        "/product1/3.jpeg",
+        "/product1/4.jpeg"
       ]
     },
     {
@@ -40,7 +40,12 @@ export default function Home() {
       name: "Gourmet Kaninkød Serie B",
       description: "Eksklusivt kaninkød til detailhandel og specialbutikker",
       category: "Gourmet Serie",
-      image: { src: "/6.jpeg", alt: "Gourmet kaninkød produkt 6" }
+      images: [
+        "/product2/1.jpeg",
+        "/product2/2.jpeg",
+        "/product2/3.jpeg",
+        "/product2/4.jpeg"
+      ]
     },
     {
       id: 3,
@@ -48,9 +53,8 @@ export default function Home() {
       description: "Pålideligt kaninkød til grossister og detailhandel",
       category: "Standard Serie",
       images: [
-        { src: "/7.jpeg", alt: "Standard kaninkød produkt 7" },
-        { src: "/8.jpeg", alt: "Standard kaninkød produkt 8" },
-        { src: "/9.jpeg", alt: "Standard kaninkød produkt 9" },
+        "/product3/1.jpeg",
+        "/product3/2.jpeg"
       ]
     }
   ];
@@ -186,32 +190,10 @@ export default function Home() {
                 aria-labelledby={`product-${product.id}`}
               >
                 {/* Imagen del producto */}
-                {product.images ? (
-                  <ProductCarousel 
-                    images={product.images} 
-                    productName={product.name}
-                  />
-                ) : (
-                  <div style={{ position: 'relative' }}>
-                    <div style={{
-                      position: 'relative',
-                      height: '256px',
-                      width: '100%',
-                      overflow: 'hidden',
-                      borderRadius: '12px 12px 0 0',
-                      backgroundColor: '#f3f4f6'
-                    }}>
-                      <Image
-                        src={product.image.src}
-                        alt={`${product.name} - ${product.image.alt}`}
-                        fill
-                        style={{ objectFit: 'cover' }}
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                        priority
-                      />
-                    </div>
-                  </div>
-                )}
+                <ProductCarousel 
+                  images={product.images} 
+                  productName={product.name}
+                />
                 
                 {/* Información del producto */}
                 <div className="p-4 sm:p-6">

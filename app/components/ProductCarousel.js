@@ -9,172 +9,82 @@ export default function ProductCarousel({ images, productName }) {
   // Si no hay imágenes, mostrar placeholder
   if (!images || images.length === 0) {
     return (
-      <div style={{
-        position: 'relative',
-        height: '256px',
-        width: '100%',
-        overflow: 'hidden',
-        borderRadius: '12px 12px 0 0',
-        backgroundColor: '#f3f4f6'
-      }}>
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
-          <div style={{ textAlign: 'center' }}>
-            <p style={{ color: '#6b7280' }}>Billede ikke tilgængelig</p>
-          </div>
-        </div>
+      <div className="carousel-container relative h-64 w-full bg-gray-100 flex items-center justify-center">
+        <p className="text-gray-500">Billede ikke tilgængelig</p>
       </div>
     );
   }
 
-  const goToSlide = (index) => {
-    if (index >= 0 && index < images.length) {
-      setCurrentIndex(index);
-    }
-  };
-
-  const goToPrevious = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
-
-  const goToNext = () => {
+  const nextImage = () => {
     setCurrentIndex((prevIndex) => 
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
   };
 
-  const currentImage = images[currentIndex];
+  const prevImage = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
+
+  const goToImage = (index) => {
+    setCurrentIndex(index);
+  };
 
   return (
-    <div style={{ position: 'relative' }}>
-      {/* Main image container */}
-      <div style={{
-        position: 'relative',
-        height: '256px',
-        width: '100%',
-        overflow: 'hidden',
-        borderRadius: '12px 12px 0 0',
-        backgroundColor: '#f3f4f6'
-      }}>
-        {/* Current image */}
-        <Image
-          src={currentImage.src}
-          alt={`${productName} - ${currentImage.alt}`}
-          fill
-          style={{ objectFit: 'cover' }}
-          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          priority={currentIndex === 0}
-        />
-        
-        {/* Navigation arrows - only show if there are multiple images */}
-        {images.length > 1 && (
-          <>
-            <button
-              onClick={goToPrevious}
-              style={{
-                position: 'absolute',
-                left: '8px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                color: 'white',
-                border: 'none',
-                borderRadius: '50%',
-                width: '32px',
-                height: '32px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                zIndex: 10
-              }}
-              aria-label="Forrige billede"
-            >
-              ←
-            </button>
-            
-            <button
-              onClick={goToNext}
-              style={{
-                position: 'absolute',
-                right: '8px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                color: 'white',
-                border: 'none',
-                borderRadius: '50%',
-                width: '32px',
-                height: '32px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                zIndex: 10
-              }}
-              aria-label="Næste billede"
-            >
-              →
-            </button>
-          </>
-        )}
-
-        {/* Image counter - only show if there are multiple images */}
-        {images.length > 1 && (
-          <div style={{
-            position: 'absolute',
-            top: '8px',
-            right: '8px',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            color: 'white',
-            padding: '4px 8px',
-            borderRadius: '12px',
-            fontSize: '12px',
-            zIndex: 10
-          }}>
-            {currentIndex + 1} / {images.length}
-          </div>
-        )}
-      </div>
-
-      {/* Dots indicator - only show if there are multiple images */}
+    <div className="carousel-container relative h-64 w-full">
+      {/* Imagen principal */}
+      <Image
+        src={images[currentIndex]}
+        alt={`${productName} - Imagen ${currentIndex + 1}`}
+        fill
+        className="carousel-image object-cover"
+        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
+      />
+      
+      {/* Botones de navegación */}
       {images.length > 1 && (
-        <div style={{
-          position: 'absolute',
-          bottom: '8px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          gap: '4px',
-          zIndex: 10
-        }}>
+        <>
+          <button
+            onClick={prevImage}
+            className="carousel-nav-button absolute left-2 top-1/2 transform -translate-y-1/2"
+            aria-label="Imagen anterior"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          
+          <button
+            onClick={nextImage}
+            className="carousel-nav-button absolute right-2 top-1/2 transform -translate-y-1/2"
+            aria-label="Siguiente imagen"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </>
+      )}
+      
+      {/* Indicadores de puntos */}
+      {images.length > 1 && (
+        <div className="carousel-dots">
           {images.map((_, index) => (
             <button
-              key={`dot-${index}`}
-              onClick={() => goToSlide(index)}
-              style={{
-                width: '8px',
-                height: '8px',
-                borderRadius: '50%',
-                border: 'none',
-                cursor: 'pointer',
-                backgroundColor: index === currentIndex ? 'white' : 'rgba(255, 255, 255, 0.5)',
-                transform: index === currentIndex ? 'scale(1.25)' : 'scale(1)',
-                transition: 'all 0.3s'
-              }}
-              aria-label={`Gå til billede ${index + 1}`}
+              key={index}
+              onClick={() => goToImage(index)}
+              className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}
+              aria-label={`Ir a imagen ${index + 1}`}
             />
           ))}
+        </div>
+      )}
+      
+      {/* Contador de imágenes */}
+      {images.length > 1 && (
+        <div className="carousel-counter">
+          {currentIndex + 1} / {images.length}
         </div>
       )}
     </div>
