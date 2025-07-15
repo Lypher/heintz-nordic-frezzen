@@ -160,116 +160,111 @@ export default function Home() {
 
              case 'products':
          return (
-           <section className="w-full max-w-7xl px-4 pt-6 sm:pt-8" aria-labelledby="catalog-heading">
-            <h2 id="catalog-heading" className="text-2xl sm:text-3xl font-bold text-center text-blue-800 mb-6 sm:mb-8 animate-fade-in-up">
-              Vores Produktkatalog
-            </h2>
-            
-            {/* Søgebar */}
-            <SearchBar onSearch={handleSearch} onClear={handleClearSearch} />
-            
-            {/* Resultatindikator */}
-            {searchActive && (
-              <div className="mb-6 text-center">
-                <p className="text-gray-600">
-                  {productsToShow.length === 1 
-                    ? '1 produkt fundet' 
-                    : `${productsToShow.length} produkter fundet`
-                  }
-                  {filteredProducts && filteredProducts.length !== products.length && (
-                    <span className="text-gray-500"> af {products.length} total</span>
-                  )}
+           <section className="px-4 pt-6 sm:pt-8 flex justify-center" aria-labelledby="catalog-heading">
+            <div className="w-full max-w-5xl">
+              <h2 id="catalog-heading" className="text-2xl sm:text-3xl font-bold text-center text-blue-800 mb-6 sm:mb-8 animate-fade-in-up">
+                Vores Produktkatalog
+              </h2>
+              {/* Søgebar */}
+              <SearchBar onSearch={handleSearch} onClear={handleClearSearch} />
+              {/* Resultatindikator */}
+              {searchActive && (
+                <div className="mb-6 text-center">
+                  <p className="text-gray-600">
+                    {productsToShow.length === 1 
+                      ? '1 produkt fundet' 
+                      : `${productsToShow.length} produkter fundet`
+                    }
+                    {filteredProducts && filteredProducts.length !== products.length && (
+                      <span className="text-gray-500"> af {products.length} total</span>
+                    )}
+                  </p>
+                </div>
+              )}
+              {/* Grilla de productos centrada */}
+              <div className="flex justify-center w-full">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6 justify-center w-auto">
+                  {productsToShow.map((product, index) => (
+                    <article 
+                      key={product.id} 
+                      className="main-card bg-white rounded-xl overflow-hidden shadow-lg border border-blue-100 animate-fade-in-scale"
+                      style={{ '--stagger-index': index }}
+                      tabIndex="0"
+                      role="article"
+                      aria-labelledby={`product-${product.id}`}
+                    >
+                      {/* Produktbillede */}
+                      <ProductCarousel 
+                        images={product.images} 
+                        productName={product.name}
+                      />
+                      {/* Produktinformation */}
+                      <div className="p-4 sm:p-6">
+                        <div className="mb-3">
+                          <span className="inline-block bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                            {product.category}
+                          </span>
+                        </div>
+                        <h3 id={`product-${product.id}`} className="text-lg sm:text-xl font-bold text-blue-800 mb-2">
+                          {product.name}
+                        </h3>
+                        <p className="text-gray-600 text-sm sm:text-base mb-4 leading-relaxed">
+                          {product.description}
+                        </p>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-1">
+                            <div className="flex space-x-1">
+                              {[...Array(5)].map((_, i) => (
+                                <svg
+                                  key={i}
+                                  className="w-4 h-4 text-yellow-400"
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                >
+                                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                              ))}
+                            </div>
+                            <span className="text-sm text-gray-500 ml-1">5.0</span>
+                          </div>
+                          <button
+                            className="btn-primary text-sm px-4 py-2"
+                            onClick={() => setSelectedProduct(product)}
+                          >
+                            Se mere
+                          </button>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+              {/* Besked når der ikke er resultater */}
+              {searchActive && productsToShow.length === 0 && (
+                <div className="text-center py-12">
+                  <div className="w-16 h-16 mx-auto mb-4 text-gray-400">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-medium text-gray-900 mb-2">Ingen produkter fundet</h3>
+                  <p className="text-gray-600 mb-4">Prøv at ændre dine søgekriterier eller ryd søgningen.</p>
+                  <button
+                    onClick={handleClearSearch}
+                    className="btn-primary px-6 py-2"
+                  >
+                    Ryd søgning
+                  </button>
+                </div>
+              )}
+              <div className="text-center mt-12 sm:mt-16 animate-fade-in-up">
+                <p className="text-xl sm:text-2xl font-bold text-blue-800 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                  Kataloget udvides snart!
+                </p>
+                <p className="text-gray-600 mt-2 text-base sm:text-lg">
+                  Nye produkter kommer til
                 </p>
               </div>
-            )}
-            
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6">
-              {productsToShow.map((product, index) => (
-                <article 
-                  key={product.id} 
-                  className="main-card bg-white rounded-xl overflow-hidden shadow-lg border border-blue-100 animate-fade-in-scale"
-                  style={{ '--stagger-index': index }}
-                  tabIndex="0"
-                  role="article"
-                  aria-labelledby={`product-${product.id}`}
-                >
-                  {/* Produktbillede */}
-                  <ProductCarousel 
-                    images={product.images} 
-                    productName={product.name}
-                  />
-                  
-                  {/* Produktinformation */}
-                  <div className="p-4 sm:p-6">
-                    <div className="mb-3">
-                      <span className="inline-block bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                        {product.category}
-                      </span>
-                    </div>
-                    
-                    <h3 id={`product-${product.id}`} className="text-lg sm:text-xl font-bold text-blue-800 mb-2">
-                      {product.name}
-                    </h3>
-                    
-                    <p className="text-gray-600 text-sm sm:text-base mb-4 leading-relaxed">
-                      {product.description}
-                    </p>
-                    
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-1">
-                        <div className="flex space-x-1">
-                          {[...Array(5)].map((_, i) => (
-                            <svg
-                              key={i}
-                              className="w-4 h-4 text-yellow-400"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                            >
-                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                          ))}
-                        </div>
-                        <span className="text-sm text-gray-500 ml-1">5.0</span>
-                      </div>
-                      
-                      <button
-                        className="btn-primary text-sm px-4 py-2"
-                        onClick={() => setSelectedProduct(product)}
-                      >
-                        Se mere
-                      </button>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-            
-            {/* Besked når der ikke er resultater */}
-            {searchActive && productsToShow.length === 0 && (
-              <div className="text-center py-12">
-                <div className="w-16 h-16 mx-auto mb-4 text-gray-400">
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2">Ingen produkter fundet</h3>
-                <p className="text-gray-600 mb-4">Prøv at ændre dine søgekriterier eller ryd søgningen.</p>
-                <button
-                  onClick={handleClearSearch}
-                  className="btn-primary px-6 py-2"
-                >
-                  Ryd søgning
-                </button>
-              </div>
-            )}
-            
-            <div className="text-center mt-12 sm:mt-16 animate-fade-in-up">
-              <p className="text-xl sm:text-2xl font-bold text-blue-800 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-                Kataloget udvides snart!
-              </p>
-              <p className="text-gray-600 mt-2 text-base sm:text-lg">
-                Nye produkter kommer til
-              </p>
             </div>
           </section>
         );
