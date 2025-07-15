@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "Heintz Nordic Frezzen - Importør og distributør af frossent kaninkød i Danmark",
-  description: "Heintz Nordic Frezzen er din pålidelige partner for kvalitets frossent kaninkød i Danmark. Vi tilbyder professionel import og distribution med fokus på kvalitet og service.",
+  description: "Heintz Nordic Frezzen er importør og distributør af frossent kaninkød i Danmark.",
   keywords: "frossent kaninkød, importør, distributør, Danmark, kvalitets kød, Heintz Nordic Frezzen",
   authors: [{ name: "Heintz Nordic Frezzen" }],
   creator: "Heintz Nordic Frezzen",
@@ -29,7 +29,7 @@ export const metadata = {
   },
   openGraph: {
     title: "Heintz Nordic Frezzen - Importør og distributør af frossent kaninkød",
-    description: "Din pålidelige partner for kvalitets frossent kaninkød i Danmark",
+    description: "Heintz Nordic Frezzen er importør og distributør af frossent kaninkød i Danmark",
     url: 'https://heintz-nordic-frezzen.dk',
     siteName: 'Heintz Nordic Frezzen',
     images: [
@@ -46,7 +46,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Heintz Nordic Frezzen - Importør og distributør af frossent kaninkød",
-    description: "Din pålidelige partner for kvalitets frossent kaninkød i Danmark",
+    description: "Heintz Nordic Frezzen er importør og distributør af frossent kaninkød i Danmark",
     images: ['/logo.jpg'],
   },
   robots: {

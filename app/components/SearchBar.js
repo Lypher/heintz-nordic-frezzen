@@ -8,9 +8,9 @@ export default function SearchBar({ onSearch, onClear }) {
 
   const categories = [
     { value: 'all', label: 'Alle kategorier' },
-    { value: 'Professionel Serie', label: 'Professionel Serie' },
-    { value: 'Gourmet Serie', label: 'Gourmet Serie' },
-    { value: 'Standard Serie', label: 'Standard Serie' }
+    { value: 'Muslos de conejo', label: 'Kaninlår' },
+    { value: 'Conejo troceado', label: 'Hakket kanin' },
+    { value: 'Conejo entero', label: 'Hele kanin' }
   ];
 
   const handleSearch = (e) => {
@@ -42,9 +42,9 @@ export default function SearchBar({ onSearch, onClear }) {
   return (
     <div className="w-full max-w-4xl mx-auto mb-8">
       <form onSubmit={handleSearch} className="space-y-4">
-        {/* Layout de 2 renglones en móvil, 1 renglón en desktop */}
+        {/* Layout med 2 rækker på mobil, 1 række på desktop */}
         <div className="flex flex-col sm:flex-row gap-4">
-          {/* Primer renglón: Barra de búsqueda (siempre arriba) */}
+          {/* Første række: Søgebar (altid øverst) */}
           <div className="flex-1 relative">
             <input
               type="text"

@@ -49,50 +49,172 @@ export default function AboutModal({ isOpen, onClose }) {
 
         {/* Contenido del modal */}
         <div className="p-6">
-          <div className="text-center mb-6 sm:mb-8">
-            <div className="w-20 sm:w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-800 mx-auto rounded-full mb-4"></div>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 items-start">
-            <div>
-              <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">
-                Heintz Nordic Frezzen er importør og distributør af frossent kaninkød i Danmark, dedikeret til kvalitet og service.
+          <div className="space-y-6 sm:space-y-8">
+            {/* Introducción */}
+            <div className="text-center">
+              <h4 className="text-xl sm:text-2xl font-bold text-blue-800 mb-4">
+                Vores historie starter her
+              </h4>
+              <p className="text-lg sm:text-xl text-gray-700 mb-4 leading-relaxed">
+                Alt startede med et simpelt spørgsmål: Hvorfor spiser man ikke kaninkød i Danmark?
               </p>
-              <div className="space-y-3 sm:space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-blue-600 rounded-full flex-shrink-0"></div>
-                  <span className="text-gray-700 text-sm sm:text-base">Kvalitetsprodukter</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-blue-600 rounded-full flex-shrink-0"></div>
-                  <span className="text-gray-700 text-sm sm:text-base">Pålidelig levering</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-blue-600 rounded-full flex-shrink-0"></div>
-                  <span className="text-gray-700 text-sm sm:text-base">Ekspert service</span>
+            </div>
+
+            {/* Origen */}
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 sm:p-6">
+              <h5 className="text-lg sm:text-xl font-semibold text-blue-800 mb-3">Oprindelsen</h5>
+              <p className="text-gray-700 text-sm sm:text-base leading-relaxed mb-3">
+                Oprindelsen af Heintz Nordic Frozzen opstår fra grunderen Tibor Heintz' opmærksomme blik, 
+                der ved ankomsten til Danmark bemærkede en åbenlys fraværen: kaninkød var ikke en del af 
+                den sædvanlige forbrug.
+              </p>
+              <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
+                Med sin erfaring i fødevarebranchen og sin rejse gennem forskellige lande forstod han, 
+                at dette produkt, så værdsat for sin næringsmæssige bidrag og sine sundhedsegenskaber, 
+                var helt fraværende i et marked, der i stigende grad kræver mere kvalitet og sundhed i 
+                deres kost.
+              </p>
+            </div>
+
+            {/* Cita de Tibor */}
+            <div className="border-l-4 border-blue-600 pl-4 sm:pl-6 bg-blue-50 rounded-r-xl p-4">
+              <blockquote className="text-gray-700 text-sm sm:text-base italic leading-relaxed">
+                "Jeg så en mangel, noget der manglede. Kanin er et sundt kød, der spises i mange lande 
+                verden over, men her var det simpelthen ikke til stede. Jeg spurgte mig selv: Hvorfor 
+                ikke bringe denne føde, der var en del af mit liv, til et sted, der også søger en bedre 
+                kost til deres nye generationer?"
+              </blockquote>
+            </div>
+
+            {/* Experiencia de Tibor */}
+            <div>
+              <h5 className="text-lg sm:text-xl font-semibold text-blue-800 mb-3">Tibors baggrund</h5>
+              <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
+                Tibors forhold til dette produkt er ikke tilfældigt: hans barndom i Argentina forløb 
+                mellem familiens kanineopdræt, hvor han lærte fra en tidlig alder fordelene og 
+                ædelheden af dette kød. Han uddannede sig som Agronomisk Tekniker, specialiserede sig 
+                i kanineopdræt og kendte hele processen, fra produktion til ansvarlig forbrug.
+              </p>
+            </div>
+
+            {/* De la idea al proyecto */}
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 sm:p-6">
+              <h5 className="text-lg sm:text-xl font-semibold text-blue-800 mb-3">Fra idé til projekt</h5>
+              <p className="text-gray-700 text-sm sm:text-base leading-relaxed mb-3">
+                Med støtte fra Fredericia Business Manager forvandlede Tibor denne bekymring til et 
+                konkret projekt. Efter måneder af forskning, undersøgelse af regler og forskrifter, 
+                specialiseret rådgivning og timer af arbejde med frossen fødevarelogistik, 
+                konsoliderede Heintz Nordic Frozzen sig som det første firma specialiseret i 
+                frossent kaninkød i Danmark.
+              </p>
+              <blockquote className="text-gray-700 text-sm sm:text-base italic leading-relaxed border-l-4 border-blue-600 pl-3">
+                "At arbejde med fødevarer er ikke nemt, og endnu mindre i et land, hvor du ikke 
+                kender alle love fra starten. Men med indsats, forskning og engagement lykkedes det 
+                os at skabe noget, der ikke eksisterede her før."
+              </blockquote>
+            </div>
+
+            {/* Visión */}
+            <div>
+              <h5 className="text-lg sm:text-xl font-semibold text-blue-800 mb-3">Vores vision</h5>
+              <p className="text-gray-700 text-sm sm:text-base leading-relaxed mb-3">
+                Vores vision er klar: at bidrage til en sundere kost. Uden for at bringe et nyt produkt 
+                er Tibors vision at bidrage med en ændring: at danske familier, de nye generationer, 
+                kan få adgang til sunde, bæredygtige og højeste kvalitetsproteiner.
+              </p>
+              <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
+                Hans erfaring med frossen fødevarelogistik i Danmark, hvor han fungerede som 
+                koordinator i vigtige warehouses, gav ham den nødvendige viden til at designe sikre, 
+                effektive processer rettet mod excellence.
+              </p>
+            </div>
+
+            {/* Mensaje personal */}
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 sm:p-6">
+              <h5 className="text-lg sm:text-xl font-semibold text-blue-800 mb-3">
+                Et personligt budskab til dem, der møder os for første gang
+              </h5>
+              <blockquote className="text-gray-700 text-sm sm:text-base italic leading-relaxed">
+                "Vi kommer ikke kun for at sælge kød. Vi kommer for at tilbyde et sundt alternativ, 
+                plejet og med overbevisningen om at gøre tingene rigtigt. Vi tror, at kaninkød skal 
+                være til stede i familiens daglige kost, ikke som noget sporadisk, men som en del af 
+                en mere bevidst og moderne kost."
+              </blockquote>
+            </div>
+
+            {/* Misión, Visión y Valores */}
+            <div className="space-y-6 sm:space-y-8">
+              {/* Misión */}
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 sm:p-6">
+                <h5 className="text-lg sm:text-xl font-semibold text-blue-800 mb-3 flex items-center gap-2">
+                  <span className="text-blue-600">🔹</span>
+                  Mission
+                </h5>
+                <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
+                  At lette adgangen til sundt kaninkød i Danmark ved at tilbyde et produkt af høj kvalitet, 
+                  pålideligt og med processer, der garanterer sikkerhed, sporing og excellence i service. 
+                  Vi arbejder for at bidrage til en moderne, bevidst kost, der er i overensstemmelse med 
+                  de nye generationer.
+                </p>
+              </div>
+
+              {/* Visión */}
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 sm:p-6">
+                <h5 className="text-lg sm:text-xl font-semibold text-blue-800 mb-3 flex items-center gap-2">
+                  <span className="text-blue-600">🔹</span>
+                  Vision
+                </h5>
+                <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
+                  At blive referencen i Danmark for distribution af sundt kaninkød, hvor vi bliver 
+                  anerkendt for vores engagement for kvalitet, sporing og de nye generationers 
+                  fødevarevelvære.
+                </p>
+              </div>
+
+              {/* Valores */}
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 sm:p-6">
+                <h5 className="text-lg sm:text-xl font-semibold text-blue-800 mb-4 flex items-center gap-2">
+                  <span className="text-blue-600">🔹</span>
+                  Værdier
+                </h5>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-green-600">✅</span>
+                    <span className="text-gray-700 text-sm sm:text-base">Kvalitet uden kompromis</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-green-600">✅</span>
+                    <span className="text-gray-700 text-sm sm:text-base">Engagement for sundhed</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-green-600">✅</span>
+                    <span className="text-gray-700 text-sm sm:text-base">Transparens og tillid</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-green-600">✅</span>
+                    <span className="text-gray-700 text-sm sm:text-base">Professionel og menneskelig service</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-green-600">✅</span>
+                    <span className="text-gray-700 text-sm sm:text-base">Fremtidssyn</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-green-600">✅</span>
+                    <span className="text-gray-700 text-sm sm:text-base">Bæredygtighed</span>
+                  </div>
                 </div>
               </div>
             </div>
-            
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 sm:p-6">
-              <h4 className="text-lg sm:text-xl font-semibold text-blue-800 mb-3 sm:mb-4">Vores Mission</h4>
-              <p className="text-gray-700 text-sm sm:text-base mb-4">
-                At levere det bedste frossne kaninkød til vores kunder i Danmark med fokus på kvalitet, service og pålidelighed.
-              </p>
-              <h4 className="text-lg sm:text-xl font-semibold text-blue-800 mb-3 sm:mb-4">Vores Vision</h4>
-              <p className="text-gray-700 text-sm sm:text-base">
-                At blive den mest betroede partner for frossent kaninkød i Danmark gennem innovation, bæredygtighed og kundetilfredshed.
+
+            {/* Cierre */}
+            <div className="text-center bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-4 sm:p-6 text-white">
+              <h5 className="text-lg sm:text-xl font-bold mb-3">
+                Heintz Nordic Frozzen
+              </h5>
+              <p className="text-base sm:text-lg font-semibold">
+                Det første skridt mod en ny generation af sund ernæring.
               </p>
             </div>
-          </div>
-
-          {/* Información adicional */}
-          <div className="mt-8 p-6 bg-gray-50 rounded-xl">
-            <h4 className="text-lg sm:text-xl font-semibold text-blue-800 mb-4">Vores Historie</h4>
-            <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
-              Med mange års erfaring i import og distribution af frossent kaninkød har vi bygget et solidt ry for kvalitet og pålidelighed. 
-              Vi arbejder tæt sammen med vores leverandører for at sikre de højeste standarder og leverer til både detailhandel og professionelle køkkener.
-            </p>
           </div>
         </div>
 
