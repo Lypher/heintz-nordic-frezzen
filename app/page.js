@@ -34,10 +34,60 @@ export default function Home() {
   // Tilstand for at styre bløde overgange
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Después de los otros useState:
+  // 1. Agregar estados para el formulario de contacto
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    lastname: '',
+    email: '',
+    phone: '',
+    country: '',
+    residence: '',
+    language: '',
+    mode: '',
+  });
   const [contactLoading, setContactLoading] = useState(false);
   const [contactSuccess, setContactSuccess] = useState(null);
   const [contactError, setContactError] = useState(null);
+
+  // Handler para cambios en los inputs del formulario de contacto
+  const handleContactInputChange = (e) => {
+    const { name, value } = e.target;
+    setContactForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Handler para el envío del formulario de contacto
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    setContactLoading(true);
+    setContactSuccess(null);
+    setContactError(null);
+    // Validación básica
+    if (!contactForm.name || !contactForm.email) {
+      setContactError('Navn og email er påkrævet.');
+      setContactLoading(false);
+      return;
+    }
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(contactForm),
+      });
+      if (res.ok) {
+        setContactSuccess('Din besked er sendt!');
+        setContactError(null);
+        setContactForm({ name: '', lastname: '', email: '', phone: '', country: '', residence: '', language: '', mode: '' });
+      } else {
+        setContactError('Noget gik galt. Prøv igen senere.');
+        setContactSuccess(null);
+      }
+    } catch (error) {
+      setContactError('Noget gik galt. Prøv igen senere.');
+      setContactSuccess(null);
+    } finally {
+      setContactLoading(false);
+    }
+  };
 
   // Definición de los 3 productos con sus respectivas imágenes de las carpetas
   const products = [
@@ -576,133 +626,49 @@ export default function Home() {
                    <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-blue-600 to-blue-800 mx-auto rounded-full"></div>
                  </div>
                  
-                 <form className="space-y-6" onSubmit={e => e.preventDefault()}>
+                 <form className="space-y-6" onSubmit={handleContactSubmit}>
                    <div className="grid sm:grid-cols-2 gap-4">
                      <div>
-                       <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
-                         Fornavn *
-                       </label>
-                       <input
-                         type="text"
-                         id="firstName"
-                         name="firstName"
-                         required
-                         className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
-                         placeholder="Dit fornavn"
-                       />
+                       <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Fornavn *</label>
+                       <input type="text" id="name" name="name" required className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" placeholder="Dit fornavn" value={contactForm.name} onChange={handleContactInputChange} />
                      </div>
                      <div>
-                       <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
-                         Efternavn *
-                       </label>
-                       <input
-                         type="text"
-                         id="lastName"
-                         name="lastName"
-                         required
-                         className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
-                         placeholder="Dit efternavn"
-                       />
+                       <label htmlFor="lastname" className="block text-sm font-medium text-gray-700 mb-2">Efternavn *</label>
+                       <input type="text" id="lastname" name="lastname" className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" placeholder="Dit efternavn" value={contactForm.lastname} onChange={handleContactInputChange} />
                      </div>
                    </div>
-                   
                    <div>
-                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                       Email *
-                     </label>
-                     <input
-                       type="email"
-                       id="email"
-                       name="email"
-                       required
-                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
-                       placeholder="din@email.dk"
-                     />
+                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                     <input type="email" id="email" name="email" required className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" placeholder="din@email.dk" value={contactForm.email} onChange={handleContactInputChange} />
                    </div>
-                   
                    <div>
-                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                       Telefon
-                     </label>
-                     <input
-                       type="tel"
-                       id="phone"
-                       name="phone"
-                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
-                       placeholder="+45 12345678"
-                     />
+                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">Telefon</label>
+                     <input type="tel" id="phone" name="phone" className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" placeholder="+45 12345678" value={contactForm.phone} onChange={handleContactInputChange} />
                    </div>
-                   
                    <div>
-                     <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                       Virksomhed
-                     </label>
-                     <input
-                       type="text"
-                       id="company"
-                       name="company"
-                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
-                       placeholder="Virksomhedsnavn"
-                     />
+                     <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-2">Land (oprindelse)</label>
+                     <input type="text" id="country" name="country" className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" placeholder="Land" value={contactForm.country} onChange={handleContactInputChange} />
                    </div>
-                   
                    <div>
-                     <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                       Emne *
-                     </label>
-                     <select
-                       id="subject"
-                       name="subject"
-                       required
-                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
-                     >
-                       <option value="">Vælg et emne</option>
-                       <option value="general">Generel forespørgsel</option>
-                       <option value="products">Produktinformation</option>
-                       <option value="pricing">Prisforespørgsel</option>
-                       <option value="delivery">Levering</option>
-                       <option value="partnership">Partnerskab</option>
-                       <option value="other">Andet</option>
-                     </select>
+                     <label htmlFor="residence" className="block text-sm font-medium text-gray-700 mb-2">Land (bopæl)</label>
+                     <input type="text" id="residence" name="residence" className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" placeholder="Land" value={contactForm.residence} onChange={handleContactInputChange} />
                    </div>
-                   
                    <div>
-                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                       Besked *
-                     </label>
-                     <textarea
-                       id="message"
-                       name="message"
-                       rows="5"
-                       required
-                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 resize-none"
-                       placeholder="Skriv din besked her..."
-                     ></textarea>
+                     <label htmlFor="language" className="block text-sm font-medium text-gray-700 mb-2">Kontakt sprog</label>
+                     <input type="text" id="language" name="language" className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" placeholder="Sprog" value={contactForm.language} onChange={handleContactInputChange} />
                    </div>
-                   
+                   <div>
+                     <label htmlFor="mode" className="block text-sm font-medium text-gray-700 mb-2">Kontaktform</label>
+                     <input type="text" id="mode" name="mode" className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" placeholder="F.eks. telefon, email" value={contactForm.mode} onChange={handleContactInputChange} />
+                   </div>
                    <div className="flex items-center gap-3">
-                     <input
-                       type="checkbox"
-                       id="privacy"
-                       name="privacy"
-                       required
-                       className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                     />
-                     <label htmlFor="privacy" className="text-sm text-gray-700">
-                       Jeg accepterer at Heintz Nordic Frezzen må kontakte mig vedrørende min forespørgsel *
-                     </label>
+                     <input type="checkbox" id="privacy" name="privacy" required className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
+                     <label htmlFor="privacy" className="text-sm text-gray-700">Jeg accepterer at Heintz Nordic Frezzen må kontakte mig vedrørende min forespørgsel *</label>
                    </div>
-                   
-                   <button
-                     type="submit"
-                     className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                   >
-                     Send besked
-                   </button>
+                   <button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" disabled={contactLoading}>{contactLoading ? 'Sender...' : 'Send besked'}</button>
+                   {contactSuccess && <p className="text-green-600 mt-2">{contactSuccess}</p>}
+                   {contactError && <p className="text-red-600 mt-2">{contactError}</p>}
                  </form>
-                 {contactLoading && <LoadingSpinner />}
-                 {contactSuccess && <p className="text-green-600 mt-2">{contactSuccess}</p>}
-                 {contactError && <p className="text-red-600 mt-2">{contactError}</p>}
                </div>
              </div>
            </section>
