@@ -26,13 +26,18 @@ export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   // Tilstand for at styre hvilken sektion der er aktiv
-  const [activeSection, setActiveSection] = useState('home'); // 'home', 'products', 'why-us', 'why-rabbit', 'contact'
+  const [activeSection, setActiveSection] = useState('home'); // 'home', 'products', 'why-us', 'why-rabbit', 'om-os', 'contact'
   
   // Tilstand for at styre mobilmenu
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   // Tilstand for at styre bløde overgange
   const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Después de los otros useState:
+  const [contactLoading, setContactLoading] = useState(false);
+  const [contactSuccess, setContactSuccess] = useState(null);
+  const [contactError, setContactError] = useState(null);
 
   // Definición de los 3 productos con sus respectivas imágenes de las carpetas
   const products = [
@@ -213,18 +218,16 @@ export default function Home() {
                         </p>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-1">
-                            <div className="flex space-x-1">
-                              {[...Array(5)].map((_, i) => (
-                                <svg
-                                  key={i}
-                                  className="w-4 h-4 text-yellow-400"
-                                  fill="currentColor"
-                                  viewBox="0 0 20 20"
-                                >
-                                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                              ))}
-                            </div>
+                            {[...Array(5)].map((_, i) => (
+                              <svg
+                                key={i}
+                                className="w-4 h-4 text-yellow-400"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                              >
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                              </svg>
+                            ))}
                             <span className="text-sm text-gray-500 ml-1">5.0</span>
                           </div>
                           <button
@@ -279,9 +282,31 @@ export default function Home() {
              case 'why-rabbit':
          return (
            <section className="w-full max-w-6xl mx-auto px-4 pt-6 sm:pt-8">
+            {/* Banner superior */}
+            <div className="relative w-full h-48 sm:h-64 md:h-80 rounded-2xl overflow-hidden mb-8 shadow-xl">
+              <Image
+                src="/product2/1.jpeg"
+                alt="Banner kaninkød - Produkt 2"
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1200px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-blue-600/50"></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center text-white">
+                  <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">
+                    Hvorfor vælge kaninkød?
+                  </h3>
+                  <p className="text-lg sm:text-xl md:text-2xl opacity-90 drop-shadow-lg">
+                    Sundt, bæredygtigt og velsmagende valg
+                  </p>
+                </div>
+              </div>
+            </div>
+            {/* Contenido principal */}
             <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-blue-100 animate-slide-in-right">
               <div className="text-center mb-6 sm:mb-8">
-                <h3 className="text-2xl sm:text-3xl font-bold text-blue-800 mb-4">Hvorfor vælge kaninkød?</h3>
                 <div className="w-20 sm:w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-800 mx-auto rounded-full"></div>
               </div>
               
@@ -369,6 +394,55 @@ export default function Home() {
             </div>
           </section>
         );
+
+                    case 'om-os':
+  return (
+    <section className="w-full max-w-4xl mx-auto px-4 pt-8 pb-16 animate-fade-in-up">
+      <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-10 border border-blue-100">
+        <h2 className="text-3xl sm:text-4xl font-bold text-blue-800 mb-6 text-center">Om os</h2>
+        <div className="space-y-6 text-gray-800 text-base sm:text-lg leading-relaxed">
+          <h3 className="text-2xl font-semibold text-blue-700 mb-4 text-center">Vores historie begynder her</h3>
+          <p>Alt begyndte med et simpelt spørgsmål: Hvorfor spiser man ikke kaninkød i Danmark?</p>
+          <p>Oprindelsen til Heintz Nordic Frozzen kommer fra den opmærksomme observation af grundlæggeren, Tibor Heintz, som ved ankomsten til Danmark bemærkede en tydelig mangel: Kaninkød var ikke en del af det almindelige forbrug.</p>
+          <p>Med sin erfaring inden for fødevarebranchen og sin rejse gennem forskellige lande forstod han, at dette produkt, så værdsat for dets ernæringsmæssige værdi og sunde egenskaber, var fuldstændig fraværende på et marked, der i stigende grad kræver kvalitet og sundhed i kosten.</p>
+          <blockquote className="italic border-l-4 border-blue-400 pl-4 text-blue-700">“Jeg så en mangel, noget der manglede. Kanin er et sundt kød, spist i mange lande i verden, men her var det bare ikke. Jeg spurgte mig selv: Hvorfor ikke bringe denne fødevare, som var en del af mit liv, til et sted, der også søger bedre ernæring for sine nye generationer?”</blockquote>
+          <p>Tibors forhold til dette produkt er ikke tilfældigt: Hans barndom i Argentina foregik blandt familiens kaninfarme, hvor han fra en tidlig alder lærte fordelene og værdien af dette kød. Han blev uddannet som agronom, specialiserede sig i kaninavl og lærte hele processen fra produktion til ansvarligt forbrug.</p>
+          <h4 className="text-xl font-semibold text-blue-700 mt-8 mb-2">Fra idé til projekt</h4>
+          <p>Med professionel støtte fra Business Manager i Fredericia forvandlede Tibor denne bekymring til et konkret projekt. Efter måneder med research, studier af regler og lovgivning, specialiseret rådgivning og mange timers arbejde med fødevarelogistik blev Heintz Nordic Frozzen etableret som den første virksomhed specialiseret i frossen kaninkød i Danmark.</p>
+          <blockquote className="italic border-l-4 border-blue-400 pl-4 text-blue-700">“At arbejde med fødevarer er ikke let, og slet ikke i et land, hvor du ikke kender alle lovene fra starten. Men med indsats, research og engagement lykkedes det os at skabe noget, der ikke fandtes her før.”</blockquote>
+          <h4 className="text-xl font-semibold text-blue-700 mt-8 mb-2">Vores vision er klar: Bidrage til en sundere kost</h4>
+          <p>Ud over at bringe et nyt produkt er Tibors vision at bidrage til en forandring: At danske familier og nye generationer kan få adgang til sunde, bæredygtige og meget kvalitetsrige proteiner. Hans erfaring med frossen fødevarelogistik i Danmark, hvor han arbejdede som koordinator i store lagre, gav ham den nødvendige viden til at designe sikre, effektive og kvalitetsorienterede processer.</p>
+          <h4 className="text-xl font-semibold text-blue-700 mt-8 mb-2">En personlig besked til dem, der møder os for første gang</h4>
+          <blockquote className="italic border-l-4 border-blue-400 pl-4 text-blue-700">“Vi er ikke kun her for at sælge kød. Vi er her for at tilbyde et sundt alternativ, med omhu og overbevisning om at gøre tingene rigtigt. Vi mener, at kaninkød skal være en del af familiens daglige kost, ikke som noget sporadisk, men som en del af en mere bevidst og moderne ernæring.”</blockquote>
+          <p className="mt-8 font-bold text-blue-800 text-center">Heintz Nordic Frozzen: Det første skridt mod en ny generation af sund ernæring.</p>
+        </div>
+        <div className="mt-12">
+          <h3 className="text-2xl font-bold text-blue-800 mb-4 text-center">Om os</h3>
+          <div className="space-y-4 text-gray-800 text-base sm:text-lg">
+            <div>
+              <span className="font-semibold text-blue-700">🔹 MISSION</span>
+              <p>At gøre sundt kaninkød tilgængeligt i Danmark ved at tilbyde et produkt af høj kvalitet, pålideligt og med processer, der sikrer sikkerhed, sporbarhed og fremragende service. Vi arbejder for at bidrage til en moderne, bevidst og fremtidssikret kost.</p>
+            </div>
+            <div>
+              <span className="font-semibold text-blue-700">🔹 VISION</span>
+              <p>At blive den førende distributør af sundt kaninkød i Danmark, anerkendt for vores engagement i kvalitet, sporbarhed og ernæringsmæssigt velvære for nye generationer.</p>
+            </div>
+            <div>
+              <span className="font-semibold text-blue-700">🔹 VÆRDIER</span>
+              <ul className="list-disc list-inside ml-6">
+                <li>✅ Kvalitet uden kompromis</li>
+                <li>✅ Engagement for sundhed</li>
+                <li>✅ Gennemsigtighed og tillid</li>
+                <li>✅ Professionel og menneskelig service</li>
+                <li>✅ Fremtidsvision</li>
+                <li>✅ Bæredygtighed</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 
                     case 'contact':
          return (
@@ -502,7 +576,7 @@ export default function Home() {
                    <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-blue-600 to-blue-800 mx-auto rounded-full"></div>
                  </div>
                  
-                 <form className="space-y-6">
+                 <form className="space-y-6" onSubmit={e => e.preventDefault()}>
                    <div className="grid sm:grid-cols-2 gap-4">
                      <div>
                        <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
@@ -626,6 +700,9 @@ export default function Home() {
                      Send besked
                    </button>
                  </form>
+                 {contactLoading && <LoadingSpinner />}
+                 {contactSuccess && <p className="text-green-600 mt-2">{contactSuccess}</p>}
+                 {contactError && <p className="text-red-600 mt-2">{contactError}</p>}
                </div>
              </div>
            </section>
@@ -677,6 +754,26 @@ export default function Home() {
 
           {/* Menú de escritorio */}
           <nav className="hidden lg:flex gap-6" role="navigation" aria-label="Hovednavigation">
+            <button 
+              onClick={() => handleSectionChange('home')}
+              className={`font-medium transition-colors text-base focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2 rounded px-2 py-1 ${
+                activeSection === 'home' 
+                  ? 'text-blue-600 underline' 
+                  : 'text-blue-700 hover:underline'
+              }`}
+            >
+              Forside
+            </button>
+            <button 
+              onClick={() => handleSectionChange('om-os')}
+              className={`font-medium transition-colors text-base focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2 rounded px-2 py-1 ${
+                activeSection === 'om-os' 
+                  ? 'text-blue-600 underline' 
+                  : 'text-blue-700 hover:underline'
+              }`}
+            >
+              Om os
+            </button>
             <button 
               onClick={() => handleSectionChange('products')}
               className={`font-medium transition-colors text-base focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2 rounded px-2 py-1 ${
@@ -745,6 +842,26 @@ export default function Home() {
           isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}>
           <nav className="px-4 pb-4 space-y-2" role="navigation" aria-label="Mobil navigation">
+            <button 
+              onClick={() => handleSectionChange('home')}
+              className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-colors ${
+                activeSection === 'home' 
+                  ? 'bg-blue-100 text-blue-700' 
+                  : 'text-blue-700 hover:bg-blue-50'
+              }`}
+            >
+              Forside
+            </button>
+            <button 
+              onClick={() => handleSectionChange('om-os')}
+              className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-colors ${
+                activeSection === 'om-os' 
+                  ? 'bg-blue-100 text-blue-700' 
+                  : 'text-blue-700 hover:bg-blue-50'
+              }`}
+            >
+              Om os
+            </button>
             <button 
               onClick={() => handleSectionChange('products')}
               className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-colors ${

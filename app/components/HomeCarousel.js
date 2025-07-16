@@ -30,6 +30,13 @@ const HomeCarousel = ({ onNavigate }) => {
       buttonText: 'Udforsk fordele'
     },
     {
+      id: 'om-os',
+      image: '/banner.jpg',
+      title: 'Om os',
+      description: 'Lær vores historie og værdier at kende',
+      buttonText: 'Læs mere'
+    },
+    {
       id: 'contact',
       image: '/contact.jpg',
       title: 'Kontakt Os',
