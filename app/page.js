@@ -97,10 +97,11 @@ export default function Home() {
       description: "100% kaninkød. Bagparti, to krydsede lår vakuumpakket og frosset.",
       category: "Muslos de conejo",
       images: [
-        "/product1/1.jpeg",
         "/product1/2.jpeg",
         "/product1/3.jpeg",
-        "/product1/4.jpeg"
+        "/product1/4.jpeg",
+        "/product2/3.jpeg",
+        "/product2/4.jpeg"
       ]
     },
     {
@@ -110,9 +111,7 @@ export default function Home() {
       category: "Conejo troceado",
       images: [
         "/product2/1.jpeg",
-        "/product2/2.jpeg",
-        "/product2/3.jpeg",
-        "/product2/4.jpeg"
+        "/product2/2.jpeg"
       ]
     },
     {
@@ -450,14 +449,27 @@ export default function Home() {
     <section className="w-full max-w-4xl mx-auto px-4 pt-8 pb-16 animate-fade-in-up">
       <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-10 border border-blue-100">
         <h2 className="text-3xl sm:text-4xl font-bold text-blue-800 mb-6 text-center">Om os</h2>
+
         <div className="space-y-6 text-gray-800 text-base sm:text-lg leading-relaxed">
           <h3 className="text-2xl font-semibold text-blue-700 mb-4 text-center">Vores historie begynder her</h3>
           <p>Alt begyndte med et simpelt spørgsmål: Hvorfor spiser man ikke kaninkød i Danmark?</p>
           <p>Oprindelsen til Heintz Nordic Frozzen kommer fra den opmærksomme observation af grundlæggeren, Tibor Heintz, som ved ankomsten til Danmark bemærkede en tydelig mangel: Kaninkød var ikke en del af det almindelige forbrug.</p>
           <p>Med sin erfaring inden for fødevarebranchen og sin rejse gennem forskellige lande forstod han, at dette produkt, så værdsat for dets ernæringsmæssige værdi og sunde egenskaber, var fuldstændig fraværende på et marked, der i stigende grad kræver kvalitet og sundhed i kosten.</p>
           <blockquote className="italic border-l-4 border-blue-400 pl-4 text-blue-700">“Jeg så en mangel, noget der manglede. Kanin er et sundt kød, spist i mange lande i verden, men her var det bare ikke. Jeg spurgte mig selv: Hvorfor ikke bringe denne fødevare, som var en del af mit liv, til et sted, der også søger bedre ernæring for sine nye generationer?”</blockquote>
+          
+          <div className="flex justify-center mb-8">
+          <Image
+            src="/History.jpg"
+            alt="Vores historie - Heintz Nordic Frozzen"
+            width={600}
+            height={350}
+            className="rounded-xl shadow-lg object-cover"
+            priority
+          />
+       </div>
           <p>Tibors forhold til dette produkt er ikke tilfældigt: Hans barndom i Argentina foregik blandt familiens kaninfarme, hvor han fra en tidlig alder lærte fordelene og værdien af dette kød. Han blev uddannet som agronom, specialiserede sig i kaninavl og lærte hele processen fra produktion til ansvarligt forbrug.</p>
           <h4 className="text-xl font-semibold text-blue-700 mt-8 mb-2">Fra idé til projekt</h4>
+          
           <p>Med professionel støtte fra Business Manager i Fredericia forvandlede Tibor denne bekymring til et konkret projekt. Efter måneder med research, studier af regler og lovgivning, specialiseret rådgivning og mange timers arbejde med fødevarelogistik blev Heintz Nordic Frozzen etableret som den første virksomhed specialiseret i frossen kaninkød i Danmark.</p>
           <blockquote className="italic border-l-4 border-blue-400 pl-4 text-blue-700">“At arbejde med fødevarer er ikke let, og slet ikke i et land, hvor du ikke kender alle lovene fra starten. Men med indsats, research og engagement lykkedes det os at skabe noget, der ikke fandtes her før.”</blockquote>
           <h4 className="text-xl font-semibold text-blue-700 mt-8 mb-2">Vores vision er klar: Bidrage til en sundere kost</h4>
@@ -557,10 +569,10 @@ export default function Home() {
                        <div>
                          <p className="font-semibold text-blue-800 text-sm sm:text-base">Telefon</p>
                          <a 
-                           href="tel:+4591718794" 
+                           href="tel:+4551430797" 
                            className="text-blue-700 hover:underline text-sm sm:text-base focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2 rounded px-1 transition-colors duration-200"
                          >
-                           +45 91718794
+                           +45 51430797
                          </a>
                        </div>
                      </div>
@@ -936,10 +948,10 @@ export default function Home() {
             <div className="mb-2 text-sm sm:text-base">
               <span className="font-semibold">Tlf.:</span> 
               <a 
-                href="tel:+4591718794" 
+                href="tel:+4551430797" 
                 className="text-blue-700 hover:underline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2 rounded px-1"
               >
-                +45 91718794
+                +45 51430797
               </a>
             </div>
             <div className="mt-3 sm:mt-4">

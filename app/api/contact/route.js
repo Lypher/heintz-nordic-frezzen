@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
 // Usa la API key proporcionada por el usuario
-const resend = new Resend('re_boNn26d3_M2L7dCVqrVJgvfmGJNeLGHzT');
+const resend = new Resend('29f1d4fa-e16e-4f85-b683-c39c18a88159');
 
 export async function POST(request) {
   try {
@@ -27,7 +27,7 @@ export async function POST(request) {
 
     const data = await resend.emails.send({
       from: 'kontakt@heintz-nordic-frezzen.dk',
-      to: ['thb@heintz-nordic-frezzen.dk'],
+      to: ['tih@buxmind.com'],
       subject: 'Ny kontaktbesked fra hjemmesiden',
       html,
     });
