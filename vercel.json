@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "heintz-nordic-frezzen.dk"
+        }
+      ],
+      "destination": "https://www.heintz-nordic-frezzen.dk/$1",
+      "permanent": true
+    }
+  ]
+} 
