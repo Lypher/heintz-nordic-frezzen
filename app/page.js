@@ -12,6 +12,7 @@ import AboutModal from "./components/AboutModal";
 import ContactModal from "./components/ContactModal";
 import SearchBar from "./components/SearchBar";
 import HomeCarousel from "./components/HomeCarousel"; // Added import for HomeCarousel
+import Head from "next/head";
 
 export default function Home() {
   // Tilstande for modaler
@@ -703,6 +704,11 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-gray-100 flex flex-col items-center justify-start">
+      <Head>
+        <title>Heintz Nordic Frezzen | Frossen kaninkød, kvalitetskød, food import</title>
+        <meta name="description" content="Heintz Nordic Frezzen: importør og distributør af frossen kaninkød, kvalitetskød, food import, food safety, traceable origin, sustainable meat, og meget mere." />
+        <meta name="keywords" content="frossen kaninkød, rabbit meat, import af kød, meat import, kød grossist, meat wholesaler, kaninkød leverandør, rabbit meat supplier, dansk fødevareimport, Danish food import, proteinrigt kød, high-protein meat, kvalitetskød, quality meat, frossen mad engros, frozen food wholesale, fødevaredistribution, food distribution, Heintz Nordic Frezzen, kaninproduktion, rabbit production, kød til restauranter, meat for restaurants, eksport af kaninkød, rabbit meat export, dyrevelfærd fødevarer, animal welfare foods, kød til hoteller og kantiner, meat for hotels and canteens, kaninkød til Europa, rabbit meat to Europe, detailhandel fødevarer, retail food, fødevaresikkerhed, food safety, sporbar oprindelse, traceable origin, kølehus kød, cold storage meat, spiseklart kaninkød, ready-to-eat rabbit meat, kvalitetsimport, quality import, restaurantforsyning, restaurant supply, bæredygtigt kød, sustainable meat, kanin kød Danmark, rabbit meat Denmark, frisk og frossen kød, fresh and frozen meat, fødevare engros Danmark, food wholesale Denmark, spanske leverandører, Spanish suppliers, pålidelig kødleverandør, reliable meat supplier" />
+      </Head>
       {/* Skip to main content link for accessibility */}
       <a href="#main-content" className="skip-link">
         Gå til hovedindhold
