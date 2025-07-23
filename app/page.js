@@ -98,11 +98,8 @@ export default function Home() {
       description: "100% kaninkød. Bagparti, to krydsede lår vakuumpakket og frosset.",
       category: "Muslos de conejo",
       images: [
-        "/product1/2.jpeg",
-        "/product1/3.jpeg",
-        "/product1/4.jpeg",
-        "/product2/3.jpeg",
-        "/product2/4.jpeg"
+        "/product1/1.jpeg",
+    
       ]
     },
     {
@@ -112,7 +109,6 @@ export default function Home() {
       category: "Conejo troceado",
       images: [
         "/product2/1.jpeg",
-        "/product2/2.jpeg"
       ]
     },
     {
@@ -122,7 +118,6 @@ export default function Home() {
       category: "Conejo entero",
       images: [
         "/product3/1.jpeg",
-        "/product3/2.jpeg"
       ]
     }
   ];
