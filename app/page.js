@@ -951,7 +951,7 @@ export default function Home() {
                 href="tel:+4551430797" 
                 className="text-blue-700 hover:underline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2 rounded px-1"
               >
-                +45 51430797
+                +45 91718794
               </a>
             </div>
             <div className="mt-3 sm:mt-4">
